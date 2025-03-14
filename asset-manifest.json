@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/room-smart/static/css/main.de2b808a.css",
-    "main.js": "/room-smart/static/js/main.36395d6d.js",
+    "main.js": "/room-smart/static/js/main.b2ae56e9.js",
     "static/js/453.56fab47d.chunk.js": "/room-smart/static/js/453.56fab47d.chunk.js",
     "index.html": "/room-smart/index.html",
     "main.de2b808a.css.map": "/room-smart/static/css/main.de2b808a.css.map",
-    "main.36395d6d.js.map": "/room-smart/static/js/main.36395d6d.js.map",
+    "main.b2ae56e9.js.map": "/room-smart/static/js/main.b2ae56e9.js.map",
     "453.56fab47d.chunk.js.map": "/room-smart/static/js/453.56fab47d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.de2b808a.css",
-    "static/js/main.36395d6d.js"
+    "static/js/main.b2ae56e9.js"
   ]
 }
