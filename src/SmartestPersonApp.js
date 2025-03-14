@@ -343,7 +343,7 @@ const SmartestPersonApp = () => {
     }}>
       <header className="bg-gradient-to-r from-fuchsia-600 via-yellow-400 to-cyan-500 text-white p-6 text-center border-b-8 border-t-8 border-yellow-300 hero-banner" style={{boxShadow: "0 10px 0 #333"}}>
         <div className="animate-bounce inline-block mb-2">⭐⭐⭐</div>
-        <h1 className="text-3xl font-bold mb-2 text-black" style={{textShadow: "2px 2px 0 #fff"}}>
+        <h1 className="text-3xl font-bold mb-2 text-black" style={{textShadow: "2px 2px 0 #fff", background: "linear-gradient(to right, #ff00ff, #00ffff)", WebkitBackgroundClip: "text", color: "transparent"}}>
           HOW TO BE THE SMARTEST PERSON IN THE ROOM!
         </h1>
         <div className="animate-pulse">
@@ -362,7 +362,7 @@ const SmartestPersonApp = () => {
 
       <div className="p-6 max-w-4xl mx-auto w-full flex-grow">
         <div className="flex flex-col md:flex-row gap-6 mb-8">
-          <div className="bg-cyan-300 p-4 rounded-lg md:w-1/2 border-4 border-b-8 border-r-8 border-fuchsia-700 scenario-box" style={{boxShadow: "inset 2px 2px 10px white, inset -2px -2px 10px #666"}}>
+          <div className="bg-cyan-300 p-4 rounded-lg md:w-1/2 border-4 border-b-8 border-r-8 border-fuchsia-700 scenario-box" style={{boxShadow: "inset 2px 2px 10px white, inset -2px -2px 10px #666", background: "linear-gradient(to right, #ff00ff, #00ffff)"}}>
             <h2 className="text-lg font-bold mb-3 text-fuchsia-800 bg-yellow-200 p-2 text-center border-2 border-fuchsia-700 transform -rotate-1">
               <blink>*** CHOOSE YOUR SCENARIO ***</blink>
             </h2>
@@ -381,7 +381,7 @@ const SmartestPersonApp = () => {
             </div>
           </div>
 
-          <div className="bg-fuchsia-300 p-4 rounded-lg md:w-1/2 border-4 border-b-8 border-r-8 border-cyan-700 saved-box" style={{boxShadow: "inset 2px 2px 10px white, inset -2px -2px 10px #666"}}>
+          <div className="bg-fuchsia-300 p-4 rounded-lg md:w-1/2 border-4 border-b-8 border-r-8 border-cyan-700 saved-box" style={{boxShadow: "inset 2px 2px 10px white, inset -2px -2px 10px #666", background: "linear-gradient(to right, #ff00ff, #00ffff)"}}>
             <h2 className="text-lg font-bold mb-3 text-cyan-800 bg-yellow-200 p-2 text-center border-2 border-cyan-700 transform rotate-1">
               ★★★ YOUR SAVED TECHNIQUES ★★★
             </h2>
