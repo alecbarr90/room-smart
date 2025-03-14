@@ -404,10 +404,17 @@ const SmartestPersonApp = () => {
                         >
                           <BookmarkCheck className="w-5 h-5" />
                         </button>
-                        <div className="ml-2">
+                        <div className="ml-2 flex-grow">
                           <div className="font-bold">{tip.title}</div>
                           <div className="text-xs text-fuchsia-800">From: {tip.category}</div>
                         </div>
+                        <button 
+                          onClick={() => toggleSavedTip(tipId)}
+                          className="flex-shrink-0 text-red-600 mt-1"
+                          aria-label="Delete this tip"
+                        >
+                          🗑️
+                        </button>
                       </div>
                     </li>
                   ) : null;
