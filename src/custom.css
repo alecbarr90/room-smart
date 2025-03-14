@@ -1,0 +1,38 @@
+/* Custom CSS to fix gradient issues */
+.hero-banner {
+    background: linear-gradient(to right, #c026d3, #facc15, #06b6d4) !important;
+    border-top: 8px solid #fde047 !important;
+    border-bottom: 8px solid #fde047 !important;
+    box-shadow: 0 10px 0 #333 !important;
+  }
+  
+  .scenario-box {
+    background-color: #67e8f9 !important;
+    box-shadow: inset 2px 2px 10px white, inset -2px -2px 10px #666 !important;
+    border: 4px solid #a21caf !important;
+    border-bottom-width: 8px !important;
+    border-right-width: 8px !important;
+  }
+  
+  .saved-box {
+    background-color: #f0abfc !important;
+    box-shadow: inset 2px 2px 10px white, inset -2px -2px 10px #666 !important;
+    border: 4px solid #0e7490 !important;
+    border-bottom-width: 8px !important;
+    border-right-width: 8px !important;
+  }
+  
+  .all-techniques-header {
+    background: linear-gradient(to right, #fde047, #f0abfc, #67e8f9) !important;
+    border-bottom: 4px solid #eab308 !important;
+  }
+  
+  .scenario-modal-header {
+    background: linear-gradient(to right, #22d3ee, #f0abfc, #fde047) !important;
+    border-bottom: 4px solid #7e22ce !important;
+  }
+  
+  .footer-gradient {
+    background: linear-gradient(to right, #6b21a8, #a21caf, #1e40af) !important;
+    border-top: 8px solid #fde047 !important;
+  }
