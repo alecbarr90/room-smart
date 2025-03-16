@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ChevronRight, ChevronDown, Bookmark, BookmarkCheck, Brain, Lightbulb, BookOpen, PieChart, Users, Smile, Shuffle, ScrollText, Mic, Trophy } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ChevronRight, ChevronDown, Bookmark, BookmarkCheck, Brain, Lightbulb, BookOpen, PieChart, Users, Smile, Shuffle, ScrollText, Mic, Trophy, Search, X } from 'lucide-react';
 
 // 90s styled component
 const SmartestPersonApp = () => {
@@ -8,6 +8,61 @@ const SmartestPersonApp = () => {
   const [currentScenario, setCurrentScenario] = useState(null);
   const [showScenarioModal, setShowScenarioModal] = useState(false);
   const [visitorCount] = useState(Math.floor(Math.random() * 10000) + 5000);
+  
+  // Search state
+  const [searchTerm, setSearchTerm] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [showSearchResults, setShowSearchResults] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+  
+  // Search function
+  const handleSearch = () => {
+    let results = [];
+    
+    // Get all tips from all categories
+    categories.forEach(category => {
+      const categoryId = category.id;
+      const categoryTitle = category.title;
+      
+      // Filter by category if not "all"
+      if (categoryFilter !== 'all' && categoryId !== categoryFilter) {
+        return;
+      }
+      
+      category.tips.forEach(tip => {
+        // Filter by search term (case insensitive)
+        const matchesSearchTerm = searchTerm === '' || 
+          tip.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+          tip.content.toLowerCase().includes(searchTerm.toLowerCase());
+        
+        if (matchesSearchTerm) {
+          results.push({
+            ...tip,
+            categoryId,
+            categoryTitle
+          });
+        }
+      });
+    });
+    
+    setSearchResults(results);
+    setShowSearchResults(true);
+  };
+  
+  // Clear search
+  const clearSearch = () => {
+    setSearchTerm('');
+    setCategoryFilter('all');
+    setShowSearchResults(false);
+    setSearchResults([]);
+  };
+
+  // Handle search on Enter key press
+  const handleSearchKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   const categories = [
     {
@@ -361,6 +416,111 @@ const SmartestPersonApp = () => {
       </marquee>
 
       <div className="p-6 max-w-4xl mx-auto w-full flex-grow">
+        {/* Search Box - 90s Style */}
+        <div className="bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-yellow-300 p-4 rounded-lg mb-8 border-4 border-b-8 border-r-8 border-purple-700" style={{boxShadow: "inset 2px 2px 10px white, inset -2px -2px 10px #666"}}>
+          <h2 className="text-lg font-bold mb-3 text-purple-800 bg-yellow-200 p-2 text-center border-2 border-purple-700 transform rotate-1">
+            <span className="animate-pulse inline-block">🔍 SEARCH FOR SMARTNESS TECHNIQUES 🔍</span>
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Search Input */}
+            <div className="bg-white p-4 border-4 border-blue-500 border-b-8 border-r-8 md:col-span-2">
+              <label className="block text-blue-800 font-bold mb-3 text-lg">Search Strategies:</label>
+              <div className="flex">
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyPress={handleSearchKeyPress}
+                  placeholder="Type your search and press Enter..."
+                  className="w-full p-3 border-4 border-purple-500 font-bold text-purple-800 text-lg"
+                  style={{fontFamily: "'Comic Sans MS', 'Comic Sans', Arial, sans-serif"}}
+                />
+                <button
+                  onClick={handleSearch}
+                  className="bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white px-6 border-4 border-b-8 border-purple-900 font-bold hover:from-purple-600 hover:to-fuchsia-600 transform hover:rotate-1 transition-transform flex items-center"
+                >
+                  <Search className="w-6 h-6" />
+                </button>
+              </div>
+              <p className="text-gray-600 mt-2 text-sm">Press Enter to search or click the search button!</p>
+            </div>
+            
+            {/* Category Filter */}
+            <div className="bg-white p-4 border-4 border-fuchsia-500 border-b-8 border-r-8">
+              <label className="block text-fuchsia-800 font-bold mb-3">Filter by Category:</label>
+              <select
+                value={categoryFilter}
+                onChange={(e) => {
+                  setCategoryFilter(e.target.value);
+                  if (searchTerm) handleSearch();
+                }}
+                className="w-full p-3 border-4 border-fuchsia-500 font-bold text-fuchsia-800 bg-white"
+                style={{fontFamily: "'Comic Sans MS', 'Comic Sans', Arial, sans-serif"}}
+              >
+                <option value="all">All Categories</option>
+                {categories.map(category => (
+                  <option key={category.id} value={category.id}>{category.title}</option>
+                ))}
+              </select>
+            </div>
+            
+            {/* Clear Button */}
+            <div className="bg-white p-4 border-4 border-cyan-500 border-b-8 border-r-8 flex items-center">
+              <button
+                onClick={clearSearch}
+                className="w-full bg-gradient-to-r from-yellow-400 to-red-500 text-white py-3 px-4 border-4 border-b-8 border-yellow-700 font-bold hover:from-yellow-500 hover:to-red-600 transform hover:-rotate-1 transition-transform text-lg"
+              >
+                CLEAR SEARCH!
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        {/* Search Results */}
+        {showSearchResults && (
+          <div className="bg-white rounded-lg mb-8 border-4 border-b-8 border-r-8 border-green-500">
+            <div className="p-4 bg-gradient-to-r from-green-300 via-cyan-300 to-blue-300 rounded-t-lg border-b-4 border-green-500 text-center">
+              <h2 className="text-xl font-bold text-black">SEARCH RESULTS</h2>
+              <div className="mt-2 bg-white inline-block px-4 py-1 border-2 border-blue-500 transform rotate-1">
+                <span className="text-blue-600 font-bold">Found {searchResults.length} techniques!</span>
+              </div>
+            </div>
+            
+            {searchResults.length === 0 ? (
+              <div className="p-8 text-center">
+                <p className="text-purple-800 font-bold text-lg">No results found!</p>
+                <p className="text-gray-600 mt-2">Try different search terms or filters.</p>
+                <div className="mt-4 animate-bounce text-2xl">😢</div>
+              </div>
+            ) : (
+              <ul className="divide-y-2 divide-green-200 p-4">
+                {searchResults.map(tip => (
+                  <li key={tip.id} className="py-4">
+                    <div className="flex items-start">
+                      <button 
+                        onClick={() => toggleSavedTip(tip.id)} 
+                        className="flex-shrink-0 text-gray-400 hover:text-red-600 transition-colors mt-1"
+                        aria-label={savedTips.includes(tip.id) ? "Unsave this tip" : "Save this tip"}
+                      >
+                        {savedTips.includes(tip.id) ? (
+                          <BookmarkCheck className="w-5 h-5 text-red-600" />
+                        ) : (
+                          <Bookmark className="w-5 h-5" />
+                        )}
+                      </button>
+                      <div className="ml-2">
+                        <h4 className="font-bold text-purple-800">{tip.title}</h4>
+                        <div className="text-xs text-fuchsia-800 mb-1">From: {tip.categoryTitle}</div>
+                        <p className="text-gray-800">{tip.content}</p>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
         <div className="flex flex-col md:flex-row gap-6 mb-8">
           <div className="bg-cyan-300 p-4 rounded-lg md:w-1/2 border-4 border-b-8 border-r-8 border-fuchsia-700 scenario-box" style={{boxShadow: "inset 2px 2px 10px white, inset -2px -2px 10px #666", background: "linear-gradient(to right, #ff00ff, #00ffff)"}}>
             <h2 className="text-lg font-bold mb-3 text-fuchsia-800 bg-yellow-200 p-2 text-center border-2 border-fuchsia-700 transform -rotate-1">
