@@ -5,7 +5,6 @@
 *   The basic structure of the website is working, with a 90s-themed design.
 *   The ability to browse strategies by category is implemented.
 *   The ability to save strategies for later reference is implemented.
-*   The ability to view strategies by scenario is implemented.
 *   The search functionality is now improved with:
     *   A more prominent and user-friendly search input field
     *   Enter key press functionality for searching
@@ -13,11 +12,6 @@
     *   Automatic search when changing category filter
     *   Clear user instructions
     *   Responsive search results display
-*   The Personality/Work Situation Quiz is implemented with:
-    *   5 questions about work environment and style
-    *   Scoring logic that maps answers to technique categories
-    *   Results page showing personality type and recommendations
-    *   90s-style visual elements and animations
 *   Technique Selection/Save Animations are implemented with:
     *   Sparkle effects when saving techniques
     *   Flying animations for saved techniques
@@ -43,4 +37,4 @@
 
 **Progress status:**
 
-In progress - Starting implementation of new features (Quiz, Animations, and Combinations)
+In progress - Starting implementation of new features (Animations and Combinations)
