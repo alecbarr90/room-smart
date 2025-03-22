@@ -1,125 +1,117 @@
-/* Sparkle Effect */
-@keyframes sparkle {
+/* Animation for the blinking effect (replacement for <blink> tag) */
+.blink {
+  animation: blink-animation 1s steps(2, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* Animation for marquee effect (replacement for <marquee> tag) */
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 15s linear infinite;
+  padding-left: 100%;
+}
+
+@keyframes marquee {
   0% {
-    transform: scale(1);
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0%, 100% {
     opacity: 1;
   }
   50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
+    opacity: 0.5;
   }
 }
 
-.sparkle {
-  position: relative;
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-.sparkle::before {
-  content: '✨';
-  position: absolute;
-  animation: sparkle 0.5s ease-in-out;
-  z-index: 10;
-}
-
-/* Flying Animation */
-@keyframes fly-to-saved {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: translate(-20px, -50px) scale(0.8);
-    opacity: 0.8;
-  }
-  100% {
-    transform: translate(-40px, -100px) scale(0.6);
-    opacity: 0;
-  }
-}
-
-.fly-animation {
-  animation: fly-to-saved 0.8s ease-out forwards;
-}
-
-/* Success Feedback */
-@keyframes success-bounce {
-  0%, 20%, 50%, 80%, 100% {
+/* Bounce animation */
+@keyframes bounce {
+  0%, 100% {
     transform: translateY(0);
   }
-  40% {
-    transform: translateY(-20px);
-  }
-  60% {
-    transform: translateY(-10px);
-  }
-}
-
-.success-bounce {
-  animation: success-bounce 1s ease-in-out;
-}
-
-/* Milestone Animation */
-@keyframes milestone-celebration {
-  0% {
-    transform: scale(1);
-  }
   50% {
-    transform: scale(1.2) rotate(5deg);
+    transform: translateY(-25%);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+/* Rotate animation */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate {
+  animation: rotate 10s linear infinite;
+}
+
+/* Shimmer effect for elements */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
   }
   100% {
-    transform: scale(1) rotate(0);
+    background-position: 200% 0;
   }
 }
 
-.milestone {
-  animation: milestone-celebration 0.8s ease-in-out;
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
 }
 
-/* Accordion Animation */
-.accordion-expand {
-  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
+/* Hover effects for buttons */
+.hover-grow {
+  transition: transform 0.3s ease;
 }
 
-.accordion-expand.open {
-  max-height: 1000px;
-  opacity: 1;
+.hover-grow:hover {
+  transform: scale(1.05);
 }
 
-/* Selection Highlight */
-@keyframes highlight-pulse {
-  0% {
-    background-color: rgba(255, 255, 0, 0);
-  }
-  50% {
-    background-color: rgba(255, 255, 0, 0.3);
-  }
-  100% {
-    background-color: rgba(255, 255, 0, 0);
-  }
+/* Transition utilities */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
-.highlight {
-  animation: highlight-pulse 1s ease-in-out;
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .sparkle::before,
-  .fly-animation,
-  .success-bounce,
-  .milestone,
-  .highlight {
-    animation: none !important;
-  }
-  
-  .accordion-expand {
-    transition: none !important;
-  }
+.transition-colors {
+  transition-property: color, background-color, border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
