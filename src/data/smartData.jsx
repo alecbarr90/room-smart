@@ -1,4 +1,3 @@
-import React from 'react';
 import { Brain, PieChart, BookOpen, ScrollText, Users, Smile, Shuffle, Lightbulb, Mic, Trophy } from 'lucide-react';
 
 export const categories = [

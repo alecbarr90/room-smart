@@ -22,6 +22,8 @@ const CategoryList = ({ categories, selectedCategory, toggleCategory, savedTips,
           <div key={category.id} className="overflow-hidden">
             <button
               onClick={() => toggleCategory(category.id)}
+              aria-expanded={selectedCategory === category.id}
+              aria-controls={`category-${category.id}`}
               className="w-full p-4 flex items-center justify-between hover:bg-cyan-100 transition-colors bg-gradient-to-r from-white to-yellow-100"
             >
               <div className="flex items-center">
@@ -39,7 +41,7 @@ const CategoryList = ({ categories, selectedCategory, toggleCategory, savedTips,
             </button>
 
             {selectedCategory === category.id && (
-              <div className="px-4 pb-4 bg-fuchsia-100">
+              <div id={`category-${category.id}`} className="px-4 pb-4 bg-fuchsia-100">
                 <ul className="divide-y-2 divide-cyan-400 border-2 border-cyan-500 bg-white">
                   {category.tips.map(tip => (
                     <li key={tip.id} className="py-3 px-3 hover:bg-yellow-50">

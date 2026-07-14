@@ -14,7 +14,7 @@ const SavedTips = ({ savedTips, toggleSavedTip, getTipById }) => {
       </h2>
       {savedTips.length === 0 ? (
         <div className="text-purple-800 p-4 text-center font-bold bg-white border-2 border-dashed border-purple-600">
-          <p className="blink">You haven't saved any techniques yet.</p>
+          <p className="blink">You haven&apos;t saved any techniques yet.</p>
           <p className="text-sm mt-2">Click the bookmark icons to save your favourites!</p>
           <div className="inline-block mt-2 text-xl">👉👉👉</div>
         </div>
@@ -28,6 +28,7 @@ const SavedTips = ({ savedTips, toggleSavedTip, getTipById }) => {
                   <button 
                     onClick={() => toggleSavedTip(tipId)}
                     className="flex-shrink-0 text-red-600 mt-1"
+                    aria-label={`Remove ${tip.title} from saved techniques`}
                   >
                     <BookmarkCheck className="w-5 h-5" />
                   </button>
@@ -35,13 +36,6 @@ const SavedTips = ({ savedTips, toggleSavedTip, getTipById }) => {
                     <div className="font-bold">{tip.title}</div>
                     <div className="text-xs text-fuchsia-800">From: {tip.category}</div>
                   </div>
-                  <button 
-                    onClick={() => toggleSavedTip(tipId)}
-                    className="flex-shrink-0 text-red-600 mt-1"
-                    aria-label="Delete this tip"
-                  >
-                    🗑️
-                  </button>
                 </div>
               </li>
             ) : null;

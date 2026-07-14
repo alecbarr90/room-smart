@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# RoomSmart
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A deliberately retro guide to useful meeting, presentation, creative, and client techniques. The visual design is proudly stuck in 1997; the application underneath it is not.
 
-## Available Scripts
+## Live site
 
-In the project directory, you can run:
+Visit [alecbarr90.github.io/room-smart](https://alecbarr90.github.io/room-smart).
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Search by title or advice text
+- Filter results by category
+- Browse recommended techniques for common scenarios
+- Save techniques in the current browser
+- Responsive layout and reduced-motion support
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Saved techniques are stored only in browser local storage. They are not uploaded or shared and can be removed by clearing browser site data.
 
-### `npm test`
+## Local development
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm ci
+npm run dev
+```
 
-### `npm run build`
+Vite prints the local address when the development server starts.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Quality checks
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm test
+npm run lint
+npm run build
+npm audit --audit-level=high
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Deployment
 
-### `npm run eject`
+GitHub Actions builds and deploys the `main` branch to GitHub Pages after the test, lint, build, and dependency checks pass. Production assets use the `/room-smart/` base path.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Technologies
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- React
+- Vite and Vitest
+- Tailwind CSS
+- Testing Library
+- GitHub Pages
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Rights
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Copyright is retained by the repository owner. See [LICENSE.md](LICENSE.md). No permission to reuse the code or written material is granted unless the owner provides it separately.

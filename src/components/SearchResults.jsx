@@ -5,8 +5,7 @@ const SearchResults = ({
   searchResults, 
   savedTips, 
   toggleSavedTip, 
-  showSearchResults,
-  clearSearch 
+  showSearchResults
 }) => {
   if (!showSearchResults) return null;
 

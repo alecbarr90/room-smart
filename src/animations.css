@@ -115,3 +115,25 @@
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .blink,
+  .animate-bounce,
+  .animate-marquee,
+  .animate-pulse,
+  .animate-rotate,
+  .shimmer {
+    animation: none !important;
+  }
+
+  .animate-marquee {
+    padding-left: 0;
+    white-space: normal;
+  }
+
+  .transition-all,
+  .transition-colors,
+  .transition-transform {
+    transition-duration: 0.01ms !important;
+  }
+}
