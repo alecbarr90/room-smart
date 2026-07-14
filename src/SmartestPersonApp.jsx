@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { categories, scenarios, getTipById } from './data/smartData';
 import SearchBox from './components/SearchBox';
 import SearchResults from './components/SearchResults';
@@ -6,14 +6,18 @@ import SavedTips from './components/SavedTips';
 import ScenarioSection from './components/ScenarioSection';
 import CategoryList from './components/CategoryList';
 import ScenarioModal from './components/ScenarioModal';
+import { searchTips } from './lib/search';
+import { loadSavedTips, saveSavedTips } from './lib/savedTips';
 
 // 90s styled component
 const SmartestPersonApp = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [savedTips, setSavedTips] = useState([]);
+  const [savedTips, setSavedTips] = useState(() =>
+    loadSavedTips().filter(tipId => getTipById(tipId))
+  );
   const [currentScenario, setCurrentScenario] = useState(null);
   const [showScenarioModal, setShowScenarioModal] = useState(false);
-  const [visitorCount] = useState(Math.floor(Math.random() * 10000) + 5000);
+  const visitorCount = 8243;
   
   // Search state
   const [searchTerm, setSearchTerm] = useState('');
@@ -22,38 +26,14 @@ const SmartestPersonApp = () => {
   const [searchResults, setSearchResults] = useState([]);
   
   // Search function
-  const handleSearch = useCallback(() => {
-    let results = [];
-    
-    // Get all tips from all categories
-    categories.forEach(category => {
-      const categoryId = category.id;
-      const categoryTitle = category.title;
-      
-      // Filter by category if not "all"
-      if (categoryFilter !== 'all' && categoryId !== categoryFilter) {
-        return;
-      }
-      
-      category.tips.forEach(tip => {
-        // Filter by search term (case insensitive)
-        const matchesSearchTerm = searchTerm === '' || 
-          tip.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-          tip.content.toLowerCase().includes(searchTerm.toLowerCase());
-        
-        if (matchesSearchTerm) {
-          results.push({
-            ...tip,
-            categoryId,
-            categoryTitle
-          });
-        }
-      });
-    });
-    
-    setSearchResults(results);
+  const handleSearch = useCallback((nextCategoryFilter = categoryFilter) => {
+    setSearchResults(searchTips(searchTerm, nextCategoryFilter));
     setShowSearchResults(true);
   }, [searchTerm, categoryFilter]);
+
+  useEffect(() => {
+    saveSavedTips(savedTips);
+  }, [savedTips]);
   
   // Clear search
   const clearSearch = useCallback(() => {
@@ -146,7 +126,6 @@ const SmartestPersonApp = () => {
           savedTips={savedTips}
           toggleSavedTip={toggleSavedTip}
           showSearchResults={showSearchResults}
-          clearSearch={clearSearch}
         />
 
         <div className="flex flex-col md:flex-row gap-6 mb-8">
@@ -201,12 +180,12 @@ const SmartestPersonApp = () => {
           on a Pentium 166MHz
         </p>
         <p className="text-xs mt-2 font-bold">
-          E-MAIL THE WEBMASTER: <a href="#" className="text-yellow-300 underline">webmaster@geocities.com</a>
+          E-MAIL THE WEBMASTER: <span className="text-yellow-300">webmaster@geocities.com</span>
         </p>
         <div className="text-center mt-4">
-          <a href="#" className="text-yellow-300 inline-block border-2 border-yellow-300 p-2 mx-2 font-bold hover:bg-yellow-300 hover:text-purple-800">HOME</a>
-          <a href="#" className="text-yellow-300 inline-block border-2 border-yellow-300 p-2 mx-2 font-bold hover:bg-yellow-300 hover:text-purple-800">GUESTBOOK</a>
-          <a href="#" className="text-yellow-300 inline-block border-2 border-yellow-300 p-2 mx-2 font-bold hover:bg-yellow-300 hover:text-purple-800">LINKS</a>
+          <a href="./" className="text-yellow-300 inline-block border-2 border-yellow-300 p-2 mx-2 font-bold hover:bg-yellow-300 hover:text-purple-800">HOME</a>
+          <span className="text-yellow-300 inline-block border-2 border-yellow-300 p-2 mx-2 font-bold" aria-disabled="true">GUESTBOOK</span>
+          <span className="text-yellow-300 inline-block border-2 border-yellow-300 p-2 mx-2 font-bold" aria-disabled="true">LINKS</span>
         </div>
       </footer>
     </div>

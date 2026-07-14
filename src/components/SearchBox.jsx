@@ -22,10 +22,11 @@ const SearchBox = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Search Input */}
         <div className="bg-white p-4 border-4 border-blue-500 border-b-8 border-r-8 md:col-span-2">
-          <label className="block text-blue-800 font-bold mb-3 text-lg">Search Strategies:</label>
+          <label htmlFor="strategy-search" className="block text-blue-800 font-bold mb-3 text-lg">Search Strategies:</label>
           <div className="flex">
             <input
               type="text"
+              id="strategy-search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyPress={handleSearchKeyPress}
@@ -34,7 +35,8 @@ const SearchBox = ({
               style={{fontFamily: "'Comic Sans MS', 'Comic Sans', Arial, sans-serif"}}
             />
             <button
-              onClick={handleSearch}
+              onClick={() => handleSearch()}
+              aria-label="Search techniques"
               className="bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white px-6 border-4 border-b-8 border-purple-900 font-bold hover:from-purple-600 hover:to-fuchsia-600 transform hover:rotate-1 transition-transform flex items-center"
             >
               <Search className="w-6 h-6" />
@@ -45,12 +47,14 @@ const SearchBox = ({
         
         {/* Category Filter */}
         <div className="bg-white p-4 border-4 border-fuchsia-500 border-b-8 border-r-8">
-          <label className="block text-fuchsia-800 font-bold mb-3">Filter by Category:</label>
+          <label htmlFor="category-filter" className="block text-fuchsia-800 font-bold mb-3">Filter by Category:</label>
           <select
+            id="category-filter"
             value={categoryFilter}
             onChange={(e) => {
-              setCategoryFilter(e.target.value);
-              if (searchTerm) handleSearch();
+              const nextCategoryFilter = e.target.value;
+              setCategoryFilter(nextCategoryFilter);
+              if (searchTerm) handleSearch(nextCategoryFilter);
             }}
             className="w-full p-3 border-4 border-fuchsia-500 font-bold text-fuchsia-800 bg-white"
             style={{fontFamily: "'Comic Sans MS', 'Comic Sans', Arial, sans-serif"}}

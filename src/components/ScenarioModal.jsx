@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { BookmarkCheck, Bookmark } from 'lucide-react';
 
 const ScenarioModal = ({ 
@@ -9,22 +9,41 @@ const ScenarioModal = ({
   savedTips, 
   toggleSavedTip 
 }) => {
+  const closeButtonRef = useRef(null);
+
+  useEffect(() => {
+    if (!showScenarioModal || !currentScenario) return undefined;
+
+    const previouslyFocusedElement = document.activeElement;
+    closeButtonRef.current?.focus();
+
+    return () => previouslyFocusedElement?.focus();
+  }, [showScenarioModal, currentScenario]);
+
   if (!showScenarioModal || !currentScenario) return null;
   
   return (
     <div 
       className="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center p-4 z-50 overflow-y-auto"
-      onClick={() => setShowScenarioModal(false)}
     >
+      <button
+        type="button"
+        className="absolute inset-0 h-full w-full cursor-default"
+        onClick={() => setShowScenarioModal(false)}
+        aria-label="Close scenario recommendations"
+      />
       <div 
-        className="bg-yellow-100 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto my-12 relative border-8 border-purple-500"
-        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="scenario-modal-title"
+        className="bg-yellow-100 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto my-12 relative z-10 border-8 border-purple-500"
         style={{boxShadow: "10px 10px 0 #000"}}
       >
         <div className="sticky top-0 bg-gradient-to-r from-cyan-400 via-fuchsia-300 to-yellow-300 z-10 border-b-4 border-purple-500 scenario-modal-header">
           <div className="flex justify-between items-center p-4">
-            <h2 className="text-xl font-bold text-purple-900 bg-white py-1 px-3 border-2 border-purple-800 transform -rotate-1">⭐ {currentScenario.title} ⭐</h2>
+            <h2 id="scenario-modal-title" className="text-xl font-bold text-purple-900 bg-white py-1 px-3 border-2 border-purple-800 transform -rotate-1">⭐ {currentScenario.title} ⭐</h2>
             <button 
+              ref={closeButtonRef}
               onClick={() => setShowScenarioModal(false)}
               className="text-red-500 hover:text-red-700 p-2 rounded-full bg-white hover:bg-yellow-200 transition-colors border-2 border-red-500 font-bold"
               aria-label="Close modal"
@@ -51,6 +70,7 @@ const ScenarioModal = ({
                     <button 
                       onClick={() => toggleSavedTip(tipId)}
                       className="text-gray-400 hover:text-red-600 transition-colors"
+                      aria-label={savedTips.includes(tipId) ? `Unsave ${tip.title}` : `Save ${tip.title}`}
                     >
                       {savedTips.includes(tipId) ? (
                         <BookmarkCheck className="w-5 h-5 text-red-600" />
