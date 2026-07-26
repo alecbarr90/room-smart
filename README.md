@@ -6,6 +6,8 @@ A deliberately retro guide to useful meeting, presentation, creative, and client
 
 Visit [alecbarr90.github.io/room-smart](https://alecbarr90.github.io/room-smart).
 
+Short link: [tinyurl.com/smartestintheroom](https://tinyurl.com/smartestintheroom).
+
 ## Features
 
 - Search by title or advice text
